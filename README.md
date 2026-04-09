@@ -12,7 +12,7 @@ Personal Operating System project with clear separation between backend and fron
 
 1. `cd backend`
 2. `npm install`
-3. create `backend/.env` using `backend/.env.example`
+3. create `backend/.env` using `backend/.env.example` (single env file for backend)
 4. `npm run db:init`
 5. `npm run dev`
 

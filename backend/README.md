@@ -30,9 +30,14 @@ Backend-first foundation for the Personal Operating System project.
 
 Create backend/.env using backend/.env.example.
 
+Use only this file for backend environment variables:
+
+- backend/.env
+
 Important:
+
 - DATABASE_URL should be the direct Postgres connection string from Supabase.
-- If placeholder [YOUR_DB_PASSWORD] exists in DATABASE_URL, app can fill it from DB_PASS or db_pass.
+- SUPABASE_SERVICE_ROLE_KEY is required if you want cloud file uploads to Supabase Storage.
 
 ## Local run
 
