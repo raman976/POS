@@ -7,6 +7,11 @@ const createNoteSchema = z.object({
   body: z.string().min(1),
 });
 
+const updateNoteSchema = z.object({
+  title: z.string().min(1).max(120).optional(),
+  body: z.string().min(1).optional(),
+});
+
 export class NoteService {
   constructor(private readonly notes: INoteRepository) {}
 
@@ -22,5 +27,14 @@ export class NoteService {
 
   public async listNotes(ownerId: string): Promise<Note[]> {
     return this.notes.listByOwner(ownerId);
+  }
+
+  public async updateNote(ownerId: string, noteId: string, input: unknown): Promise<Note | null> {
+    const data = updateNoteSchema.parse(input);
+    return this.notes.update(noteId, ownerId, data);
+  }
+
+  public async deleteNote(ownerId: string, noteId: string): Promise<boolean> {
+    return this.notes.delete(noteId, ownerId);
   }
 }

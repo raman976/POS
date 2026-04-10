@@ -8,9 +8,12 @@ export const noteRoutes = (
   jwtService: JwtService,
 ): Router => {
   const router = Router();
+  const auth = authMiddleware(jwtService);
 
-  router.post('/', authMiddleware(jwtService), noteController.create);
-  router.get('/', authMiddleware(jwtService), noteController.list);
+  router.post('/', auth, noteController.create);
+  router.get('/', auth, noteController.list);
+  router.patch('/:id', auth, noteController.update);
+  router.delete('/:id', auth, noteController.remove);
 
   return router;
 };

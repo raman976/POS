@@ -2,6 +2,7 @@ import { Note } from '../../domain/entities/Note';
 import {
   CreateNoteInput,
   INoteRepository,
+  UpdateNoteInput,
 } from '../../domain/repositories/INoteRepository';
 import { pool } from '../db/pool';
 
@@ -50,5 +51,65 @@ export class PostgresNoteRepository implements INoteRepository {
     );
 
     return rows.map(toNote);
+  }
+
+  public async findById(id: string, ownerId: string): Promise<Note | null> {
+    const { rows } = await pool.query<NoteRow>(
+      `
+      SELECT id, owner_id, title, body, created_at, updated_at
+      FROM notes
+      WHERE id = $1 AND owner_id = $2
+      LIMIT 1
+      `,
+      [id, ownerId],
+    );
+
+    return rows[0] ? toNote(rows[0]) : null;
+  }
+
+  public async update(id: string, ownerId: string, input: UpdateNoteInput): Promise<Note | null> {
+    const fields: string[] = [];
+    const values: unknown[] = [];
+    let idx = 1;
+
+    if (input.title !== undefined) {
+      fields.push(`title = $${idx++}`);
+      values.push(input.title);
+    }
+    if (input.body !== undefined) {
+      fields.push(`body = $${idx++}`);
+      values.push(input.body);
+    }
+
+    if (fields.length === 0) {
+      return this.findById(id, ownerId);
+    }
+
+    fields.push('updated_at = NOW()');
+    values.push(id, ownerId);
+
+    const { rows } = await pool.query<NoteRow>(
+      `
+      UPDATE notes
+      SET ${fields.join(', ')}
+      WHERE id = $${idx++} AND owner_id = $${idx}
+      RETURNING id, owner_id, title, body, created_at, updated_at
+      `,
+      values,
+    );
+
+    return rows[0] ? toNote(rows[0]) : null;
+  }
+
+  public async delete(id: string, ownerId: string): Promise<boolean> {
+    const result = await pool.query(
+      `
+      DELETE FROM notes
+      WHERE id = $1 AND owner_id = $2
+      `,
+      [id, ownerId],
+    );
+
+    return (result.rowCount ?? 0) > 0;
   }
 }
