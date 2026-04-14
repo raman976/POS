@@ -24,7 +24,9 @@ export class AuthController {
         },
       });
     } catch (error) {
-      res.status(400).json({ message: (error as Error).message });
+      const msg = error instanceof Error ? (error.message || error.constructor.name) : String(error)
+      console.error('[register]', msg)
+      res.status(400).json({ message: msg })
     }
   };
 
@@ -41,7 +43,9 @@ export class AuthController {
         },
       });
     } catch (error) {
-      res.status(401).json({ message: (error as Error).message });
+      const msg = error instanceof Error ? (error.message || error.constructor.name) : String(error)
+      console.error('[login]', msg)
+      res.status(401).json({ message: msg })
     }
   };
 
@@ -68,5 +72,26 @@ export class AuthController {
   public logout = (_req: Request, res: Response): void => {
     res.clearCookie('session_token');
     res.status(204).send();
+  };
+
+  public verifyPassword = async (req: Request, res: Response): Promise<void> => {
+    try {
+      if (!req.userId) {
+        res.status(401).json({ message: 'Unauthorized' });
+        return;
+      }
+
+      const password = String(req.body?.password ?? '');
+      const valid = await this.authService.verifyPassword(req.userId, password);
+      if (!valid) {
+        res.status(401).json({ message: 'Invalid account password' });
+        return;
+      }
+
+      res.status(200).json({ ok: true });
+    } catch (error) {
+      const msg = error instanceof Error ? (error.message || error.constructor.name) : String(error);
+      res.status(400).json({ message: msg });
+    }
   };
 }

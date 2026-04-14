@@ -76,4 +76,14 @@ export class AuthService {
 
     return user;
   }
+
+  public async verifyPassword(userId: string, password: string): Promise<boolean> {
+    const passwordSchema = z.string().min(1)
+    const plainPassword = passwordSchema.parse(password)
+
+    const user = await this.users.findById(userId)
+    if (!user) throw new Error('User not found')
+
+    return this.passwordHasher.compare(plainPassword, user.passwordHash)
+  }
 }

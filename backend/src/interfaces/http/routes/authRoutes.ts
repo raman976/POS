@@ -12,6 +12,7 @@ export const authRoutes = (
   router.post('/register', authController.register);
   router.post('/login', authController.login);
   router.get('/me', authMiddleware(jwtService), authController.me);
+  router.post('/verify-password', authMiddleware(jwtService), authController.verifyPassword);
   router.post('/logout', authController.logout);
 
   return router;
