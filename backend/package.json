@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/raman976/POS#readme",
   "dependencies": {
+    "@supabase/supabase-js": "^2.103.3",
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
@@ -31,6 +32,7 @@
     "express": "^5.2.1",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.3",
+    "multer": "^1.4.5-lts.1",
     "pg": "^8.20.0",
     "zod": "^4.3.6"
   },
@@ -41,6 +43,7 @@
     "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^1.4.12",
     "@types/node": "^25.6.0",
     "@types/pg": "^8.20.0",
     "@types/supertest": "^7.2.0",
