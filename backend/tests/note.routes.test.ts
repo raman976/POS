@@ -2,12 +2,14 @@ import request from 'supertest';
 import { createApp } from '../src/app';
 import { InMemoryUserRepository } from '../src/infrastructure/repositories/InMemoryUserRepository';
 import { InMemoryNoteRepository } from '../src/infrastructure/repositories/InMemoryNoteRepository';
+import { InMemoryFileRepository } from '../src/infrastructure/repositories/InMemoryFileRepository';
 
 describe('Note routes', () => {
   it('creates and lists notes for authenticated user', async () => {
     const app = createApp({
       userRepository: new InMemoryUserRepository(),
       noteRepository: new InMemoryNoteRepository(),
+      fileRepository: new InMemoryFileRepository(),
     });
 
     const registerResponse = await request(app).post('/api/auth/register').send({
@@ -38,6 +40,7 @@ describe('Note routes', () => {
     const app = createApp({
       userRepository: new InMemoryUserRepository(),
       noteRepository: new InMemoryNoteRepository(),
+      fileRepository: new InMemoryFileRepository(),
     });
 
     const response = await request(app).post('/api/notes').send({
