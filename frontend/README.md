@@ -3,6 +3,7 @@
 Frontend workspace is intentionally separated from backend.
 
 Planned for milestone 2:
+
 - app shell and dashboard layout
 - auth screens
 - notes and tasks views

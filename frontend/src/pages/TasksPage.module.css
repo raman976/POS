@@ -1,0 +1,250 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.header h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.addBtn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.input,
+.textarea,
+.select {
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 9px 12px;
+  font-size: 13.5px;
+  background: var(--bg);
+  color: var(--text-primary);
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.row .input,
+.row .select {
+  flex: 1;
+}
+
+.submitBtn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+.listLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: -4px;
+}
+
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.groupCard {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.groupTitle {
+  padding: 10px 14px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-light);
+  background: #f8f9ff;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.empty {
+  color: var(--text-muted);
+  font-size: 13.5px;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.taskCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.taskCard:last-child {
+  border-bottom: none;
+}
+
+.done {
+  opacity: 0.55;
+}
+
+.done .taskTitle {
+  text-decoration: line-through;
+}
+
+.taskLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.taskMeta {
+  min-width: 0;
+}
+
+.statusBtn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  background: var(--surface);
+  position: relative;
+}
+
+.statusBtn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.statusBtn::after {
+  content: attr(title);
+  position: absolute;
+  bottom: -29px;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: rgba(20, 27, 45, 0.92);
+  color: #fff;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.statusBtn:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.taskTitle {
+  font-weight: 500;
+  font-size: 13.5px;
+  color: var(--text-primary);
+}
+
+.taskDesc {
+  color: var(--text-muted);
+  font-size: 12.5px;
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.taskRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.badge.high {
+  background: #fef2f2;
+  color: var(--danger);
+}
+
+.badge.medium {
+  background: #fffbeb;
+  color: var(--warning);
+}
+
+.badge.low {
+  background: #f0fdf4;
+  color: var(--success);
+}
+
+.due {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.deleteBtn {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  background: var(--surface);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleteBtn:hover {
+  border-color: #fca5a5;
+  color: var(--danger);
+  background: var(--danger-soft);
+}
