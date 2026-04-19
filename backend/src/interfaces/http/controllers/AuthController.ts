@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
 import { AuthService } from '../../../application/services/AuthService';
+import { env } from '../../../config/env';
 
 const cookieBase = {
   httpOnly: true,
-  sameSite: 'lax' as const,
-  secure: false,
+  sameSite: (env.nodeEnv === 'production' ? 'none' : 'lax') as const,
+  secure: env.nodeEnv === 'production',
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
