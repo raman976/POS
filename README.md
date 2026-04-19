@@ -12,9 +12,10 @@ Genie tries to solve that by giving one connected workspace with a clean flow:
 - store passwords in an encrypted vault
 - upload and organize files in folders
 
-## Live frontend
+## Deployment
 
-- [Genie frontend](https://pos-one-ebon.vercel.app/)
+- [Hosted Link](https://pos-one-ebon.vercel.app/)
+- Backend is deployed in render so it may take some time because of cold start
 
 ## Project structure
 
