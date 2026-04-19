@@ -2,11 +2,14 @@ import { Request, Response } from 'express';
 import { AuthService } from '../../../application/services/AuthService';
 import { env } from '../../../config/env';
 
-const cookieBase = {
-  httpOnly: true,
-  sameSite: (env.nodeEnv === 'production' ? 'none' : 'lax') as const,
-  secure: env.nodeEnv === 'production',
-  maxAge: 7 * 24 * 60 * 60 * 1000,
+const getCookieOptions = () => {
+  const sameSite = env.nodeEnv === 'production' ? ('none' as const) : ('lax' as const);
+  return {
+    httpOnly: true,
+    sameSite,
+    secure: env.nodeEnv === 'production',
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  };
 };
 
 export class AuthController {
@@ -16,7 +19,7 @@ export class AuthController {
     try {
       const { user, token } = await this.authService.register(req.body);
 
-      res.cookie('session_token', token, cookieBase);
+      res.cookie('session_token', token, getCookieOptions());
       res.status(201).json({
         user: {
           id: user.id,
@@ -35,7 +38,7 @@ export class AuthController {
     try {
       const { user, token } = await this.authService.login(req.body);
 
-      res.cookie('session_token', token, cookieBase);
+      res.cookie('session_token', token, getCookieOptions());
       res.status(200).json({
         user: {
           id: user.id,
