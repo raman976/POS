@@ -1,27 +1,47 @@
-# POS Project
+# Genie
 
-Personal Operating System project with clear separation between backend and frontend.
+Genie is a personal digital workspace where day-to-day things live in one place: notes, tasks, events, passwords, and files.
 
-## Project layout
+The original idea came from a simple problem. Most people use one app for notes, one for tasks, one calendar, one password manager, and one cloud drive. That split works, but it also creates friction. You keep jumping between apps, context is lost, and personal information gets scattered.
 
-- `backend/` contains TypeScript + Express API, auth, services, tests, and database wiring
-- `frontend/` is reserved for the UI app (next milestone)
-- root files keep planning docs and architecture diagrams
+Genie tries to solve that by giving one connected workspace with a clean flow:
 
-## Backend quick start
+- capture notes quickly
+- organize tasks into named lists like urgent, today, and follow-up
+- manage events in calendar view
+- store passwords in an encrypted vault
+- upload and organize files in folders
 
-1. `cd backend`
-2. `npm install`
-3. create `backend/.env` using `backend/.env.example` (single env file for backend)
-4. `npm run db:init`
-5. `npm run dev`
+## Live frontend
 
-## Backend tests
+- [Genie frontend](https://pos-one-ebon.vercel.app/)
 
-1. `cd backend`
-2. `npm test`
+## Project structure
 
-## Current status
+- [backend](backend): TypeScript + Express API, auth, business services, repositories, database initialization, and tests
+- [frontend](frontend): React + TypeScript client application
+- planning and diagram files in the repository root
 
-- Backend milestone 1 is implemented and passing tests
-- Frontend folder is prepared and ready for milestone 2
+## Backend setup
+
+1. Go to [backend](backend)
+2. Install dependencies with npm install
+3. Create backend/.env from [backend/.env.example](backend/.env.example)
+4. Run npm run db:init
+5. Run npm run dev
+
+## Storage
+
+File uploads are designed for Supabase Storage.
+
+Required env keys:
+
+- SUPABASE_URL
+- SUPABASE_SERVICE_ROLE_KEY
+- SUPABASE_STORAGE_BUCKET
+
+## Current implementation status
+
+- backend modules for auth, notes, tasks, calendar, vault, files, and search are in place
+- frontend pages are connected and deployed
+- test suite is available in backend/tests
